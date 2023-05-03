@@ -30,8 +30,9 @@ char	*get_next_line(int fd)
 	if (rlen > 0)
 	{
 		if (ft_strchr(buffer, '\n') == NULL)
-		{	stash = ft_strjoin(stash, buffer);
+		{
 			read(fd, buffer, BUFF_SIZE);
+			stash = ft_strjoin(stash, buffer);
 		}
 		else //if (ft_strchr(buffer, '\n') != NULL)
 		{
