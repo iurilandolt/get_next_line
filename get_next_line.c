@@ -27,7 +27,7 @@ char	*get_next_line(int fd)
 	if (!stash)
 		return (NULL);
 	rlen = read(fd, buffer, BUFF_SIZE);
-	if (rlen > 0)
+	while (rlen > 0)
 	{
 		if (ft_strchr(buffer, '\n') == NULL)
 			stash = ft_strjoin(stash, buffer);
@@ -36,9 +36,11 @@ char	*get_next_line(int fd)
 			p = ft_strchr(buffer, '\n');
 			i = (int)(p - buffer);
 			stash = ft_strnjoin(stash, buffer, i);
+			break;
 		}
+		rlen = read(fd, buffer, BUFF_SIZE);
 	}
-	else if (rlen <= 0)
+	if (rlen <= 0 && ft_strlen(stash) == 0)
 	{
 		free(stash);
 		return (NULL);
