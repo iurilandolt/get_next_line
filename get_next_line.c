@@ -40,7 +40,7 @@ char	*get_next_line(int fd)
 		}
 		rlen = read(fd, buffer, BUFF_SIZE);
 	}
-	if (rlen <= 0 && ft_strlen(stash) == 0)
+	if (rlen <= 0)
 	{
 		free(stash);
 		return (NULL);
