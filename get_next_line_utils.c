@@ -6,7 +6,7 @@
 /*   By: rlandolt <rlandolt@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:06:06 by rlandolt          #+#    #+#             */
-/*   Updated: 2023/05/03 11:42:01 by rlandolt         ###   ########.fr       */
+/*   Updated: 2023/05/03 12:17:05 by rlandolt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,16 @@ size_t	ft_strlen(const char *s)
 	return (pos);
 }
 
-char	*ft_strrchr(const char *str, int c)
+char	*ft_strchr(const char *str, int c)
 {
-	int	i;
-
-	i = ft_strlen(str) + 1;
-	if (!c)
-		return ((char *)str + (i - 1));
-	while (--i >= 0)
+	while (*str)
 	{
-		if (*(str + i) == (char)c)
-			return ((char *)str + i);
+		if (*str == (char)c)
+			return ((char *)str);
+		str++;
 	}
+	if (*str == (char)c)
+		return ((char *)str);
 	return (NULL);
 }
 

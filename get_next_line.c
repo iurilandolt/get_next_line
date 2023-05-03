@@ -20,17 +20,17 @@ char	*get_next_line(int fd)
 
 	if (fd <= 0 || BUFF_SIZE < 1)
 		return (NULL);
-	stash = ft_strdup(buffer);
+	stash = ft_strdup("");
 	if (!stash)
 		return (NULL);
-	if (ft_strrchr(stash, '\n') != NULL)
+	if (ft_strchr(stash, '\n') != NULL)
 		return (stash);
 	rlen = read(fd, buffer, BUFF_SIZE);
 	while (rlen > 0)
 	{
 		//*(buffer + rlen) = '\0';
 		stash = ft_strjoin(stash, buffer);
-		if (ft_strrchr(buffer, '\n') != NULL)
+		if (ft_strchr(buffer, '\n') != NULL)
 			break;
 		rlen = read(fd, buffer, BUFF_SIZE);
 	}
