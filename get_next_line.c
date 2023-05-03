@@ -12,29 +12,35 @@
 
 #include "get_next_line.h"
 
+
 char	*get_next_line(int fd)
 {
 	static char	buffer[BUFF_SIZE];
-	char *stash;
-	size_t rlen;
+	char 		*stash;
+	size_t 		rlen;
+	char		*p;
+	int			i;
 
 	if (fd <= 0 || BUFF_SIZE < 1)
 		return (NULL);
 	stash = ft_strdup("");
 	if (!stash)
 		return (NULL);
-	if (ft_strchr(stash, '\n') != NULL)
-		return (stash);
 	rlen = read(fd, buffer, BUFF_SIZE);
-	while (rlen > 0)
+	if (rlen > 0)
 	{
-		//*(buffer + rlen) = '\0';
-		stash = ft_strjoin(stash, buffer);
-		if (ft_strchr(buffer, '\n') != NULL)
-			break;
-		rlen = read(fd, buffer, BUFF_SIZE);
+		if (ft_strchr(buffer, '\n') == NULL)
+		{	stash = ft_strjoin(stash, buffer);
+			read(fd, buffer, BUFF_SIZE);
+		}
+		else //if (ft_strchr(buffer, '\n') != NULL)
+		{
+			p = ft_strchr(buffer, '\n');
+			i = (int)(p - buffer);
+			stash = ft_strnjoin(stash, buffer, i);
+		}
 	}
-	if (rlen <= 0 && ft_strlen(stash) == 0)
+	else if (rlen <= 0)
 	{
 		free(stash);
 		return (NULL);

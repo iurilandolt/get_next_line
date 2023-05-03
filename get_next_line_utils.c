@@ -6,11 +6,25 @@
 /*   By: rlandolt <rlandolt@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:06:06 by rlandolt          #+#    #+#             */
-/*   Updated: 2023/05/03 12:17:05 by rlandolt         ###   ########.fr       */
+/*   Updated: 2023/05/03 16:30:18 by rlandolt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int	line_size(char *str, int c)
+{
+	int	i;
+
+	i = 0;
+	while(*str)
+	{
+		if (*str == c)
+			return (i);
+		str++;
+	}
+	return(-1);
+}
 
 size_t	ft_strlen(const char *s)
 {
@@ -86,4 +100,33 @@ char	*ft_strjoin(char const *str1, char const *str2)
 	return (dest);
 }
 
+char	*ft_strnjoin(char const *str1, char const *str2, int n)
+{
+	char	*dest;
+	size_t	len;
+	int		i;
+	int		j;
 
+	if (!str1 || !str2)
+		return (NULL);
+	len = ft_strlen(str1) + ft_strlen(str2);
+	dest = (char *)malloc(sizeof(char) * (len + 1));
+	if (!dest)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (str1[i])
+	{
+		dest[i] = str1[i];
+		i++;
+	}
+	while (str2[j] && n > 0)
+	{
+		dest[i] = str2[j];
+		i++;
+		j++;
+		n--;
+	}
+	*(dest + i) = '\0';
+	return (dest);
+}
