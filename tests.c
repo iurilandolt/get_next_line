@@ -20,7 +20,7 @@ char	*ft_strnjoin(char const *str1, char const *str2, int n)
 
 	if (!str1 || !str2)
 		return (NULL);
-	len = ft_strlen(str1) + ft_strlen(str2);
+	len = ft_strlen(str1) + n;
 	dest = (char *)malloc(sizeof(char) * (len + 1));
 	if (!dest)
 		return (NULL);
@@ -45,8 +45,8 @@ char	*ft_strnjoin(char const *str1, char const *str2, int n)
 int main(void) {
     char *str1 = "Hello, ";
     char *str2 = "world!";
-    char *result = ft_strnjoin(str1, str2, 6);
-    printf("%s\n", result);  // expected output: Hello, world
+    char *result = ft_strnjoin(str1, str2, 3);
+    printf("%s\n", result);  // expected output: Hello, wor
     free(result);  // free the dynamically allocated memory
     return 0;
 }

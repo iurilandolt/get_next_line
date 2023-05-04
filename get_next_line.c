@@ -12,6 +12,21 @@
 
 #include "get_next_line.h"
 
+int	end_line(char *str, int c)
+{
+	int	i;
+
+	i = 0;
+	while(*str)
+	{
+		if (*str == c)
+			return (i);
+		i++;
+		str++;
+	}
+	return (-1);
+
+}
 
 char	*get_next_line(int fd)
 {
@@ -19,10 +34,11 @@ char	*get_next_line(int fd)
 	char 		*stash;
 	size_t 		rlen;
 	//char		*p;
+	int n;
 
 	if (fd <= 0 || BUFF_SIZE < 1)
 		return (NULL);
-	stash = ft_strdup("");
+	stash = ft_calloc(1, 1);
 	if (!stash)
 		return (NULL);
 	rlen = read(fd, buffer, BUFF_SIZE);
@@ -34,6 +50,10 @@ char	*get_next_line(int fd)
 		else //if (ft_strchr(buffer, '\n') != NULL)
 		{
 			//stash = ft_strnjoin(stash, buffer, (int)(p - buffer));
+			n = end_line(buffer, '\n');
+			//printf("%d", n);
+			stash = ft_strnjoin(stash, buffer, n);
+			//stash = ft_strjoin(stash, buffer);
 			break;
 		}
 		rlen = read(fd, buffer, BUFF_SIZE);

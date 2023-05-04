@@ -6,25 +6,11 @@
 /*   By: rlandolt <rlandolt@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:06:06 by rlandolt          #+#    #+#             */
-/*   Updated: 2023/05/03 16:30:18 by rlandolt         ###   ########.fr       */
+/*   Updated: 2023/05/04 01:54:30 by rlandolt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-int	line_size(char *str, int c)
-{
-	int	i;
-
-	i = 0;
-	while(*str)
-	{
-		if (*str == c)
-			return (i);
-		str++;
-	}
-	return(-1);
-}
 
 size_t	ft_strlen(const char *s)
 {
@@ -62,6 +48,30 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 		i++;
 	}
 	return (dest);
+}
+
+void	*ft_calloc(size_t nitems, size_t size)
+{
+	void	*mblock;
+
+	mblock = (void *)malloc(size * nitems);
+	if (!mblock)
+		return (NULL);
+	ft_memset(mblock, 0, size * nitems);
+	return (mblock);
+}
+
+void	*ft_memset(void *str, int c, size_t len)
+{
+	size_t			i;
+
+	i = 0;
+	while (i < len)
+	{
+		*((char *)str + i) = c;
+		i++;
+	}
+	return (str);
 }
 
 char	*ft_strdup(const char *str)
@@ -109,7 +119,7 @@ char	*ft_strnjoin(char const *str1, char const *str2, int n)
 
 	if (!str1 || !str2)
 		return (NULL);
-	len = ft_strlen(str1) + ft_strlen(str2);
+	len = ft_strlen(str1) + n;
 	dest = (char *)malloc(sizeof(char) * (len + 1));
 	if (!dest)
 		return (NULL);
