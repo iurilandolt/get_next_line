@@ -18,8 +18,7 @@ char	*get_next_line(int fd)
 	static char	buffer[BUFF_SIZE];
 	char 		*stash;
 	size_t 		rlen;
-	char		*p;
-	int			i;
+	//char		*p;
 
 	if (fd <= 0 || BUFF_SIZE < 1)
 		return (NULL);
@@ -27,15 +26,14 @@ char	*get_next_line(int fd)
 	if (!stash)
 		return (NULL);
 	rlen = read(fd, buffer, BUFF_SIZE);
+	//p = ft_strchr(buffer, '\n');
 	while (rlen > 0)
 	{
 		if (ft_strchr(buffer, '\n') == NULL)
 			stash = ft_strjoin(stash, buffer);
 		else //if (ft_strchr(buffer, '\n') != NULL)
 		{
-			p = ft_strchr(buffer, '\n');
-			i = (int)(p - buffer);
-			stash = ft_strnjoin(stash, buffer, i);
+			//stash = ft_strnjoin(stash, buffer, (int)(p - buffer));
 			break;
 		}
 		rlen = read(fd, buffer, BUFF_SIZE);
@@ -62,7 +60,7 @@ int	main(void)
 
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		printf("%s\n", line);
+		printf("%s", line);
 		free(line);
 	}
 
