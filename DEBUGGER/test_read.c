@@ -85,7 +85,7 @@ char	*read_file(int fd, char *buffer)
 
 	if (!buffer)
 		buffer = ft_calloc(1, 1);
-	temp = ft_calloc(BUFF_SIZE +1, sizeof(char));
+	temp = ft_calloc(BUFF_SIZE, 1);
 	rlen = 1;
 	while (rlen > 0)
 	{
@@ -95,7 +95,7 @@ char	*read_file(int fd, char *buffer)
 			free(temp);
 			return (NULL);
 		}
-		//*(temp + rlen + 1) = '\0';
+		*(temp + rlen) = '\0';
 		buffer =  ft_strjoin(buffer, temp);
 		if (ft_strchr(buffer, '\n'))
 			break;

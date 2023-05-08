@@ -152,7 +152,7 @@ char	*ft_getremain(char *buffer)
 		j++;
 	}
 	free (buffer);
-	*(line + j + 1) = '\0';
+	*(line + j) = '\0';
 	return (line);
 }
 
@@ -172,6 +172,7 @@ char	*get_next_line(int fd)
 }
 
 /*########## MAIN ##########*/
+/*cc debug.c -fsanitize=leak  cc debug.c -fsanitize=adress */
 
 int	main(void)
 {
