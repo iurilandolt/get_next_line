@@ -80,11 +80,11 @@ char	*ft_getline(char *buffer)
 	int	i;
 
 	i = 0;
-	if (!*buffer)
+	if (!*(buffer + i))
 		return (NULL);
 	while (*(buffer + i) && *(buffer + i) != '\n')
 		i++;
-	line = ft_calloc(i + 2, sizeof(char));
+	line = ft_calloc(i + 2, 1);
 	i = 0;
 	while (*(buffer + i) && *(buffer + i) != '\n')
 	{

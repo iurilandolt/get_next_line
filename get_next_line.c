@@ -19,9 +19,9 @@ char	*read_file(int fd, char *buffer)
 
 	if (!buffer)
 		buffer = ft_calloc(1, 1);
-	temp = ft_calloc(BUFF_SIZE , sizeof(char));
+	temp = ft_calloc(BUFF_SIZE , 1);
 	rlen = 1;
-	while (rlen > 0)
+	while (rlen >= 1)
 	{
 		rlen = read(fd, temp, BUFF_SIZE);
 		if (rlen == -1)
@@ -29,7 +29,7 @@ char	*read_file(int fd, char *buffer)
 			free(temp);
 			return (NULL);
 		}
-		//*(temp + rlen + 1) = '\0';
+		*(temp + rlen + 1) = '\0';
 		buffer =  ft_strjoin(buffer, temp);
 		if (ft_strchr(buffer, '\n'))
 			break;
@@ -44,9 +44,11 @@ char	*ft_getline(char *buffer)
 	int	i;
 
 	i = 0;
+	if (!*(buffer + i))
+		return (NULL);
 	while (*(buffer + i) && *(buffer + i) != '\n')
 		i++;
-	line = ft_calloc(i + 2, sizeof(char));
+	line = ft_calloc(i + 2, 1);
 	i = 0;
 	while (*(buffer + i) && *(buffer + i) != '\n')
 	{
@@ -73,7 +75,7 @@ char	*ft_getremain(char *buffer)
 		free (buffer);
 		return (NULL);
 	}
-	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
+	line = ft_calloc((ft_strlen(buffer) - i + 1), 1);
 	i++;
 	j = 0;
 	while (*(buffer + i))
@@ -99,6 +101,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = ft_getline(buffer);
 	buffer = ft_getremain(buffer);
+	//printf("/n%d\n", fd);
 	return (line);
 }
 
@@ -114,15 +117,11 @@ int	main(void)
 		exit(EXIT_FAILURE);
 	}
 
-	//line = get_next_line(fd);
-	//printf("%s", line);
-
-	while ((line = get_next_line(fd)) != 0)
+	while ((line = get_next_line(fd)))
 	{
 		printf("%s", line);
 		free(line);
 	}
-
 
 	if (close(fd) == -1)
 	{
@@ -132,3 +131,21 @@ int	main(void)
 
 	return (EXIT_SUCCESS);
 }
+	/*
+	line = get_next_line(fd);
+	printf("%s", line);
+	line = get_next_line(fd);
+	printf("%s", line);
+	line = get_next_line(fd);
+	printf("%s", line);
+	line = get_next_line(fd);
+	printf("%s", line);
+	line = get_next_line(fd);
+	printf("%s", line);
+	line = get_next_line(fd);
+	printf("%s", line);
+	line = get_next_line(fd);
+	printf("%s", line);
+	line = get_next_line(fd);
+	printf("%s", line);
+	*/
