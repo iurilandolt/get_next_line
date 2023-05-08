@@ -50,8 +50,9 @@ char	*get_next_line(int fd)
 		else //if (ft_strchr(buffer, '\n') != NULL)
 		{
 			//stash = ft_strnjoin(stash, buffer, (int)(p - buffer));
-			n = end_line(buffer, '\n');
+			n = end_line(buffer, '\n') + 1;
 			//printf("%d", n);
+			//printf("%d", (int)(p - buffer + 1));
 			stash = ft_strnjoin(stash, buffer, n);
 			//stash = ft_strjoin(stash, buffer);
 			break;
