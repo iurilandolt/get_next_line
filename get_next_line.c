@@ -6,65 +6,100 @@
 /*   By: rlandolt <rlandolt@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:06:15 by rlandolt          #+#    #+#             */
-/*   Updated: 2023/05/04 19:03:42 by rlandolt         ###   ########.fr       */
+/*   Updated: 2023/05/08 18:50:10 by rlandolt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	end_line(char *str, int c)
+char	*read_file(int fd, char *buffer)
 {
+	char *temp;
+	int rlen;
+
+	if (!buffer)
+		buffer = ft_calloc(1, 1);
+	temp = ft_calloc(BUFF_SIZE , sizeof(char));
+	rlen = 1;
+	while (rlen > 0)
+	{
+		rlen = read(fd, temp, BUFF_SIZE);
+		if (rlen == -1)
+		{
+			free(temp);
+			return (NULL);
+		}
+		//*(temp + rlen + 1) = '\0';
+		buffer =  ft_strjoin(buffer, temp);
+		if (ft_strchr(buffer, '\n'))
+			break;
+	}
+	free(temp);
+	return (buffer);
+}
+
+char	*ft_getline(char *buffer)
+{
+	char	*line;
 	int	i;
 
 	i = 0;
-	while(*str)
-	{
-		if (*str == c)
-			return (i);
+	while (*(buffer + i) && *(buffer + i) != '\n')
 		i++;
-		str++;
+	line = ft_calloc(i + 2, sizeof(char));
+	i = 0;
+	while (*(buffer + i) && *(buffer + i) != '\n')
+	{
+		*(line + i) = *(buffer + i);
+		i++;
 	}
-	return (-1);
+	if (*(buffer + i) && *(buffer + i) == '\n')
+		*(line + i) = '\n';
+	*(line + i + 1) = '\0';
+	return (line);
+}
 
+char	*ft_getremain(char *buffer)
+{
+	char *line;
+	int i;
+	int j;
+
+	i = 0;
+	while (*(buffer + i) && *(buffer + i) != '\n')
+		i++;
+	if (!*(buffer + i))
+	{
+		free (buffer);
+		return (NULL);
+	}
+	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
+	i++;
+	j = 0;
+	while (*(buffer + i))
+	{
+		*(line + j) = *(buffer + i);
+		i++;
+		j++;
+	}
+	free (buffer);
+	*(line + j + 1) = '\0';
+	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[BUFF_SIZE];
-	char 		*stash;
-	size_t 		rlen;
-	//char		*p;
-	int n;
+	static char	*buffer;
+	char	*line;
 
-	if (fd <= 0 || BUFF_SIZE < 1)
+	if (fd < 0 || BUFF_SIZE <= 0)
 		return (NULL);
-	stash = ft_calloc(1, 1);
-	if (!stash)
+	buffer = read_file(fd, buffer);
+	if (!buffer)
 		return (NULL);
-	rlen = read(fd, buffer, BUFF_SIZE);
-	//p = ft_strchr(buffer, '\n');
-	while (rlen > 0)
-	{
-		if (ft_strchr(buffer, '\n') == NULL)
-			stash = ft_strjoin(stash, buffer);
-		else //if (ft_strchr(buffer, '\n') != NULL)
-		{
-			//stash = ft_strnjoin(stash, buffer, (int)(p - buffer));
-			n = end_line(buffer, '\n') + 1;
-			//printf("%d", n);
-			//printf("%d", (int)(p - buffer + 1));
-			stash = ft_strnjoin(stash, buffer, n);
-			//stash = ft_strjoin(stash, buffer);
-			break;
-		}
-		rlen = read(fd, buffer, BUFF_SIZE);
-	}
-	if (rlen <= 0)
-	{
-		free(stash);
-		return (NULL);
-	}
-	return (stash);
+	line = ft_getline(buffer);
+	buffer = ft_getremain(buffer);
+	return (line);
 }
 
 int	main(void)
@@ -79,11 +114,15 @@ int	main(void)
 		exit(EXIT_FAILURE);
 	}
 
-	while ((line = get_next_line(fd)) != NULL)
+	//line = get_next_line(fd);
+	//printf("%s", line);
+
+	while ((line = get_next_line(fd)) != 0)
 	{
 		printf("%s", line);
 		free(line);
 	}
+
 
 	if (close(fd) == -1)
 	{

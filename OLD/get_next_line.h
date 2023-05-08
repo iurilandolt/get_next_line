@@ -23,7 +23,10 @@
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
 char	*ft_strchr(const char *str, int c);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
+char	*ft_strdup(const char *str);
 char	*ft_strjoin(char const *str1, char const *str2);
+char	*ft_strnjoin(char const *str1, char const *str2, int n);
 void	*ft_calloc(size_t nitems, size_t size);
 void	*ft_memset(void *str, int c, size_t len);
 
