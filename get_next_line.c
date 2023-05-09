@@ -28,11 +28,11 @@ char	*ft_read(int fd, char *buffer)
 
 	if (!buffer)
 		buffer = ft_calloc(1, 1);
-	temp = ft_calloc(BUFF_SIZE + 1, 1);
+	temp = ft_calloc(BUFFER_SIZE + 1, 1);
 	rlen = 1;
 	while (rlen >= 1)
 	{
-		rlen = read(fd, temp, BUFF_SIZE);
+		rlen = read(fd, temp, BUFFER_SIZE);
 		if (rlen == -1)
 		{
 			free(temp);
@@ -103,7 +103,7 @@ char	*get_next_line(int fd)
 	static char	*buffer;
 	char		*line;
 
-	if (fd < 0 || BUFF_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = ft_read(fd, buffer);
 	if (!buffer)
@@ -112,7 +112,7 @@ char	*get_next_line(int fd)
 	buffer = ft_getremain(buffer);
 	return (line);
 }
-/*
+
 int	main(void)
 {
 	int		fd;
@@ -139,4 +139,4 @@ int	main(void)
 
 	return (EXIT_SUCCESS);
 }
-*/
+
