@@ -6,7 +6,7 @@
 /*   By: rlandolt <rlandolt@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:06:06 by rlandolt          #+#    #+#             */
-/*   Updated: 2023/05/09 13:08:53 by rlandolt         ###   ########.fr       */
+/*   Updated: 2023/05/09 22:05:57 by rlandolt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ void	*ft_calloc(size_t nitems, size_t size)
 
 	mblock = (void *)malloc(size * nitems);
 	if (!mblock)
+	{
+		free(mblock);
 		return (NULL);
+	}
 	ft_memset(mblock, 0, size * nitems);
 	return (mblock);
 }

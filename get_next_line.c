@@ -102,8 +102,10 @@ char	*get_next_line(int fd)
 {
 	static char	*buffer;
 	char		*line;
+	int			error;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	error = read(fd, 0, 0);
+	if (fd < 0 || BUFFER_SIZE <= 0 || error < 0)
 		return (NULL);
 	buffer = ft_read(fd, buffer);
 	if (!buffer)

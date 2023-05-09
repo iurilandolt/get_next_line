@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define BUFF_SIZE 10
+#define BUFFER_SIZE 10
 
 /*########## UTILS ##########*/
 
@@ -49,7 +49,10 @@ void	*ft_calloc(size_t nitems, size_t size)
 
 	mblock = (void *)malloc(size * nitems);
 	if (!mblock)
+	{
+		free(mblock);
 		return (NULL);
+	}
 	ft_memset(mblock, 0, size * nitems);
 	return (mblock);
 }
@@ -95,11 +98,11 @@ char	*ft_read(int fd, char *buffer)
 
 	if (!buffer)
 		buffer = ft_calloc(1, 1);
-	temp = ft_calloc(BUFF_SIZE + 1, 1);
+	temp = ft_calloc(BUFFER_SIZE + 1, 1);
 	rlen = 1;
 	while (rlen >= 1)
 	{
-		rlen = read(fd, temp, BUFF_SIZE);
+		rlen = read(fd, temp, BUFFER_SIZE);
 		if (rlen == -1)
 		{
 			free(temp);
@@ -169,8 +172,10 @@ char	*get_next_line(int fd)
 {
 	static char	*buffer;
 	char		*line;
+	int			error;
 
-	if (fd < 0 || BUFF_SIZE <= 0)
+	error = read(fd, 0, 0);
+	if (fd < 0 || BUFFER_SIZE <= 0 || error < 0)
 		return (NULL);
 	buffer = ft_read(fd, buffer);
 	if (!buffer)
@@ -190,7 +195,7 @@ int	main(void)
 	int		fd;
 	char	*line;
 
-	fd = open("testfile.txt", O_RDONLY);
+	fd = open("read_error.txt", O_RDONLY);
 	if (fd == -1)
 	{
 		perror("open");
