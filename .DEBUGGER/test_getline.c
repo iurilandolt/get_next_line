@@ -77,7 +77,7 @@ char	*ft_strjoin(char const *str1, char const *str2)
 char	*ft_getline(char *buffer)
 {
 	char	*line;
-	int	i;
+	int		i;
 
 	i = 0;
 	if (!*(buffer + i))

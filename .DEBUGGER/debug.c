@@ -79,14 +79,23 @@ char	*ft_strjoin(char const *str1, char const *str2)
 
 /*########## GNL ##########*/
 
-char	*read_file(int fd, char *buffer)
+char	*ft_join(char *buff1, char *buff2)
+{
+	char	*temp;
+
+	temp = ft_strjoin(buff1, buff2);
+	free(buff1);
+	return (temp);
+}
+
+char	*ft_read(int fd, char *buffer)
 {
 	char	*temp;
 	int		rlen;
 
 	if (!buffer)
 		buffer = ft_calloc(1, 1);
-	temp = ft_calloc(BUFF_SIZE, 1);
+	temp = ft_calloc(BUFF_SIZE + 1, 1);
 	rlen = 1;
 	while (rlen >= 1)
 	{
@@ -97,7 +106,7 @@ char	*read_file(int fd, char *buffer)
 			return (NULL);
 		}
 		*(temp + rlen) = '\0';
-		buffer = ft_strjoin(buffer, temp);
+		buffer = ft_join(buffer, temp);
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
@@ -163,7 +172,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFF_SIZE <= 0)
 		return (NULL);
-	buffer = read_file(fd, buffer);
+	buffer = ft_read(fd, buffer);
 	if (!buffer)
 		return (NULL);
 	line = ft_getline(buffer);

@@ -77,9 +77,9 @@ char	*ft_strjoin(char const *str1, char const *str2)
 
 char	*ft_getremain(char *buffer)
 {
-	char *line;
-	int i;
-	int j;
+	char	*line;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (*(buffer + i) && *(buffer + i) != '\n')
@@ -89,7 +89,7 @@ char	*ft_getremain(char *buffer)
 		free (buffer);
 		return (NULL);
 	}
-	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
+	line = ft_calloc((ft_strlen(buffer) - i + 1), 1);
 	i++;
 	j = 0;
 	while (*(buffer + i))

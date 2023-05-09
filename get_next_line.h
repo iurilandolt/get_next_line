@@ -18,7 +18,10 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-# define BUFF_SIZE 1024
+# ifndef BUFF_SIZE
+#  define BUFF_SIZE 1024
+
+# endif
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);

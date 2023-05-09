@@ -80,14 +80,14 @@ char	*ft_strjoin(char const *str1, char const *str2)
 
 char	*read_file(int fd, char *buffer)
 {
-	char *temp;
-	int rlen;
+	char	*temp;
+	int		rlen;
 
 	if (!buffer)
 		buffer = ft_calloc(1, 1);
 	temp = ft_calloc(BUFF_SIZE, 1);
 	rlen = 1;
-	while (rlen > 0)
+	while (rlen >= 1)
 	{
 		rlen = read(fd, temp, BUFF_SIZE);
 		if (rlen == -1)
@@ -96,11 +96,11 @@ char	*read_file(int fd, char *buffer)
 			return (NULL);
 		}
 		*(temp + rlen) = '\0';
-		buffer =  ft_strjoin(buffer, temp);
+		buffer = ft_strjoin(buffer, temp);
 		if (ft_strchr(buffer, '\n'))
-			break;
+			break ;
 	}
-	free(temp);
+	free (temp);
 	return (buffer);
 }
 
