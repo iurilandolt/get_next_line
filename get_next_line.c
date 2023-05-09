@@ -33,7 +33,7 @@ char	*ft_read(int fd, char *buffer)
 	while (rlen >= 1)
 	{
 		rlen = read(fd, temp, BUFFER_SIZE);
-		if (rlen == -1)
+		if (rlen < 0)
 		{
 			free(temp);
 			return (NULL);
@@ -105,7 +105,7 @@ char	*get_next_line(int fd)
 	int			error;
 
 	error = read(fd, 0, 0);
-	if (fd < 0 || BUFFER_SIZE <= 0 || error < 0)
+	if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0 || error < 0)
 		return (NULL);
 	buffer = ft_read(fd, buffer);
 	if (!buffer)
@@ -114,6 +114,7 @@ char	*get_next_line(int fd)
 	buffer = ft_getremain(buffer);
 	return (line);
 }
+
 /*
 int	main(void)
 {
