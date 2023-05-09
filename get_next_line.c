@@ -29,7 +29,7 @@ char	*read_file(int fd, char *buffer)
 			free(temp);
 			return (NULL);
 		}
-		*(temp + rlen + 1) = '\0';
+		*(temp + rlen) = '\0';
 		buffer = ft_strjoin(buffer, temp);
 		if (ft_strchr(buffer, '\n'))
 			break ;
@@ -130,22 +130,3 @@ int	main(void)
 
 	return (EXIT_SUCCESS);
 }
-
-	/*
-	line = get_next_line(fd);
-	printf("%s", line);
-	line = get_next_line(fd);
-	printf("%s", line);
-	line = get_next_line(fd);
-	printf("%s", line);
-	line = get_next_line(fd);
-	printf("%s", line);
-	line = get_next_line(fd);
-	printf("%s", line);
-	line = get_next_line(fd);
-	printf("%s", line);
-	line = get_next_line(fd);
-	printf("%s", line);
-	line = get_next_line(fd);
-	printf("%s", line);
-	*/

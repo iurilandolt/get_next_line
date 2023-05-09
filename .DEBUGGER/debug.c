@@ -81,12 +81,12 @@ char	*ft_strjoin(char const *str1, char const *str2)
 
 char	*read_file(int fd, char *buffer)
 {
-	char *temp;
-	int rlen;
+	char	*temp;
+	int		rlen;
 
 	if (!buffer)
 		buffer = ft_calloc(1, 1);
-	temp = ft_calloc(BUFF_SIZE , 1);
+	temp = ft_calloc(BUFF_SIZE, 1);
 	rlen = 1;
 	while (rlen >= 1)
 	{
@@ -96,19 +96,19 @@ char	*read_file(int fd, char *buffer)
 			free(temp);
 			return (NULL);
 		}
-		*(temp + rlen + 1) = '\0';
-		buffer =  ft_strjoin(buffer, temp);
+		*(temp + rlen) = '\0';
+		buffer = ft_strjoin(buffer, temp);
 		if (ft_strchr(buffer, '\n'))
-			break;
+			break ;
 	}
-	free(temp);
+	free (temp);
 	return (buffer);
 }
 
 char	*ft_getline(char *buffer)
 {
 	char	*line;
-	int	i;
+	int		i;
 
 	i = 0;
 	if (!*(buffer + i))
@@ -130,9 +130,9 @@ char	*ft_getline(char *buffer)
 
 char	*ft_getremain(char *buffer)
 {
-	char *line;
-	int i;
-	int j;
+	char	*line;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (*(buffer + i) && *(buffer + i) != '\n')
@@ -152,16 +152,16 @@ char	*ft_getremain(char *buffer)
 		j++;
 	}
 	free (buffer);
-	*(line + j) = '\0';
+	*(line + j + 1) = '\0';
 	return (line);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*buffer;
-	char	*line;
+	char		*line;
 
-	if (fd <= 0 || BUFF_SIZE <= 0)
+	if (fd < 0 || BUFF_SIZE <= 0)
 		return (NULL);
 	buffer = read_file(fd, buffer);
 	if (!buffer)
