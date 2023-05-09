@@ -6,7 +6,7 @@
 /*   By: rlandolt <rlandolt@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:06:06 by rlandolt          #+#    #+#             */
-/*   Updated: 2023/05/09 10:25:02 by rlandolt         ###   ########.fr       */
+/*   Updated: 2023/05/09 10:39:52 by rlandolt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,6 @@ char	*ft_strchr(const char *str, int c)
 	return (NULL);
 }
 
-void	*ft_calloc(size_t nitems, size_t size)
-{
-	void	*mblock;
-
-	mblock = (void *)malloc(size * nitems);
-	if (!mblock)
-		return (NULL);
-	ft_memset(mblock, 0, size * nitems);
-	return (mblock);
-}
-
 void	*ft_memset(void *str, int c, size_t len)
 {
 	size_t			i;
@@ -57,6 +46,17 @@ void	*ft_memset(void *str, int c, size_t len)
 		i++;
 	}
 	return (str);
+}
+
+void	*ft_calloc(size_t nitems, size_t size)
+{
+	void	*mblock;
+
+	mblock = (void *)malloc(size * nitems);
+	if (!mblock)
+		return (NULL);
+	ft_memset(mblock, 0, size * nitems);
+	return (mblock);
 }
 
 char	*ft_strjoin(char const *str1, char const *str2)

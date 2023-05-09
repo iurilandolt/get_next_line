@@ -103,7 +103,7 @@ char	*get_next_line(int fd)
 	buffer = ft_getremain(buffer);
 	return (line);
 }
-/*
+
 int	main(void)
 {
 	int		fd;
@@ -130,7 +130,7 @@ int	main(void)
 
 	return (EXIT_SUCCESS);
 }
-*/
+
 	/*
 	line = get_next_line(fd);
 	printf("%s", line);
