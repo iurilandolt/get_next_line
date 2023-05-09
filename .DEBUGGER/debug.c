@@ -182,6 +182,8 @@ char	*get_next_line(int fd)
 
 /*########## MAIN ##########*/
 /*cc debug.c -fsanitize=leak  cc debug.c -fsanitize=adress */
+/*valgrind --leak-check=full ./debug */
+/*gcc -g debug.c -o debug*/
 
 int	main(void)
 {
