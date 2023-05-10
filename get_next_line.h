@@ -23,11 +23,15 @@
 
 # endif
 
-char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
 char	*ft_strchr(const char *str, int c);
 char	*ft_strjoin(char const *str1, char const *str2);
 void	*ft_calloc(size_t nitems, size_t size);
 void	*ft_memset(void *str, int c, size_t len);
+char	*ft_join(char *buff1, char *buff2);
+char	*ft_read(int fd, char *buffer);
+char	*ft_getline(char *buffer);
+char	*ft_getremain(char *buffer);
+char	*get_next_line(int fd);
 
 #endif
