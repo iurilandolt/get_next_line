@@ -3,6 +3,6 @@
 libft.a
 *.swp
 .DS_Store
-.gitignore
+
 .vscode/
 *.gch
