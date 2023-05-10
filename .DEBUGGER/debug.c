@@ -72,10 +72,10 @@ char	*ft_strjoin(char const *str1, char const *str2)
 		return (NULL);
 	i = -1;
 	j = 0;
-	while (str1[++i])
-		dest[i] = str1[i];
+	while (*(str1 + ++i))
+		*(dest + i) = *(str1 + i);
 	while (str2[j])
-		dest[i++] = str2[j++];
+		*(dest + i++) = *(str2 + j++);
 	*(dest + i) = '\0';
 	return (dest);
 }

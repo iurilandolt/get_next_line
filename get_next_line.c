@@ -88,11 +88,7 @@ char	*ft_getremain(char *buffer)
 	i++;
 	j = 0;
 	while (*(buffer + i))
-	{
-		*(line + j) = *(buffer + i);
-		i++;
-		j++;
-	}
+		*(line + j++) = *(buffer + i++);
 	free (buffer);
 	*(line + j + 1) = '\0';
 	return (line);
