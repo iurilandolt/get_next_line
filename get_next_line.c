@@ -90,7 +90,7 @@ char	*ft_getremain(char *buffer)
 	while (*(buffer + i))
 		*(line + j++) = *(buffer + i++);
 	free (buffer);
-	*(line + j + 1) = '\0';
+	*(line + j) = '\0';
 	return (line);
 }
 

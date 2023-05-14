@@ -161,7 +161,7 @@ char	*ft_getremain(char *buffer)
 		j++;
 	}
 	free (buffer);
-	*(line + j + 1) = '\0';
+	*(line + j) = '\0';
 	return (line);
 }
 
@@ -190,7 +190,7 @@ int	main(void)
 	int		fd;
 	char	*line;
 
-	fd = open("read_error.txt", O_RDONLY);
+	fd = open("testfile.txt", O_RDONLY);
 	if (fd == -1)
 	{
 		perror("open");
