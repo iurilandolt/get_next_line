@@ -6,7 +6,7 @@
 /*   By: rlandolt <rlandolt@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:06:27 by rlandolt          #+#    #+#             */
-/*   Updated: 2023/05/03 11:06:27 by rlandolt         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:03:45 by rlandolt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <fcntl.h>
 # include <stdio.h>
 
 # ifndef BUFFER_SIZE

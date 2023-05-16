@@ -6,7 +6,7 @@
 /*   By: rlandolt <rlandolt@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:06:15 by rlandolt          #+#    #+#             */
-/*   Updated: 2023/05/08 18:50:10 by rlandolt         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:03:45 by rlandolt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,32 +111,3 @@ char	*get_next_line(int fd)
 	buffer = ft_getremain(buffer);
 	return (line);
 }
-
-/*
-int	main(void)
-{
-	int		fd;
-	char	*line;
-
-	fd = open("testfile.txt", O_RDONLY);
-	if (fd == -1)
-	{
-		perror("open");
-		exit(EXIT_FAILURE);
-	}
-
-	while ((line = get_next_line(fd)))
-	{
-		printf("%s", line);
-		free(line);
-	}
-
-	if (close(fd) == -1)
-	{
-		perror("close");
-		exit(EXIT_FAILURE);
-	}
-
-	return (EXIT_SUCCESS);
-}
-*/
