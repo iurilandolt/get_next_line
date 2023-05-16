@@ -6,7 +6,7 @@
 /*   By: rlandolt <rlandolt@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 19:43:47 by rlandolt          #+#    #+#             */
-/*   Updated: 2023/05/10 23:05:05 by rlandolt         ###   ########.fr       */
+/*   Updated: 2023/05/16 11:51:43 by rlandolt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,17 @@ char	*ft_getline(char *buffer)
 {
 	char	*line;
 	int		i;
+	int		term;
 
 	i = 0;
+	term = 1;
 	if (!*(buffer + i))
 		return (NULL);
 	while (*(buffer + i) && *(buffer + i) != '\n')
 		i++;
-	line = ft_calloc(i + 2, 1);
+	if (*(buffer + i) == '\n')
+		term = 2;
+	line = ft_calloc(i + term, 1);
 	i = 0;
 	while (*(buffer + i) && *(buffer + i) != '\n')
 	{
@@ -66,7 +70,6 @@ char	*ft_getline(char *buffer)
 	}
 	if (*(buffer + i) && *(buffer + i) == '\n')
 		*(line + i) = '\n';
-	*(line + i + 1) = '\0';
 	return (line);
 }
 

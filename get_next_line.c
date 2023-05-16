@@ -51,13 +51,17 @@ char	*ft_getline(char *buffer)
 {
 	char	*line;
 	int		i;
+	int		term;
 
 	i = 0;
+	term = 1;
 	if (!*(buffer + i))
 		return (NULL);
 	while (*(buffer + i) && *(buffer + i) != '\n')
 		i++;
-	line = ft_calloc(i + 2, 1);
+	if (*(buffer + i) == '\n')
+		term = 2;
+	line = ft_calloc(i + term, 1);
 	i = 0;
 	while (*(buffer + i) && *(buffer + i) != '\n')
 	{
@@ -66,7 +70,6 @@ char	*ft_getline(char *buffer)
 	}
 	if (*(buffer + i) && *(buffer + i) == '\n')
 		*(line + i) = '\n';
-	*(line + i + 1) = '\0';
 	return (line);
 }
 
